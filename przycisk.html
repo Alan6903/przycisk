@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Przycisk z efektem hover i zmianą tekstu</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 700px;
+      background-color: #f0f0f0;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #colorButton {
+        padding: 15px 30px;
+      font-size: 18px;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #colorButton:hover {
+      background-color: #83b300;
+    }
+  </style>
+</head>
+<body>
+  <a href="http://zst.trzcianka.com.pl/"><button id="colorButton">kliknij</button></a>
+  <script>
+    // Pobierz przycisk
+    const button = document.getElementById('colorButton');
+
+    // Funkcja zmieniająca kolor i tekst przycisku oraz zapisująca je w localStorage
+    function changeColorAndText() {
+      const newColor = '#dfe218'; // Nowy kolor (zielony)
+      const newText = 'kliknięto'; // Nowy tekst
+
+      button.style.backgroundColor = newColor;
+      button.textContent = newText;
+
+      // Zapisz kolor i tekst w localStorage
+      localStorage.setItem('buttonColor', newColor);
+      localStorage.setItem('buttonText', newText);
+    }
+
+    // Funkcja ładująca zapisane dane z localStorage
+    function loadColorAndText() {
+      const savedColor = localStorage.getItem('buttonColor');
+      const savedText = localStorage.getItem('buttonText');
+
+      if (savedColor) {
+        button.style.backgroundColor = savedColor;
+      }
+
+      if (savedText) {
+        button.textContent = savedText;
+      }
+    }
+
+    // Nasłuchiwanie kliknięcia
+    button.addEventListener('click', changeColorAndText);
+
+    // Ładowanie zapisanych danych przy załadowaniu strony
+    window.addEventListener('DOMContentLoaded', loadColorAndText);
+  </script>
+  
+</body>
+</html>
